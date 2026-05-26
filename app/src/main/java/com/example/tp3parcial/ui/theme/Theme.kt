@@ -1,58 +1,105 @@
 package com.example.tp3parcial.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+// ── Light colour scheme ───────────────────────────────────────────────────────
+private val LightColorScheme = lightColorScheme(
+    // Brand / interactive
+    primary            = InteractivePrimary,       // #163300  dark forest green
+    onPrimary          = BaseContrast,             // #FFFFFF
+    primaryContainer   = BackgroundNeutral,        // #E5F5EA  soft green tint
+    onPrimaryContainer = ContentPrimary,           // #122300
+
+    secondary          = InteractiveAccent,        // #7BF179  vivid green
+    onSecondary        = BaseDark,                 // #121511
+    secondaryContainer = BackgroundNeutral,        // #E5F5EA
+    onSecondaryContainer = ContentPrimary,         // #122300
+
+    tertiary           = InteractiveSecondary,     // #868685  neutral grey
+    onTertiary         = BaseContrast,             // #FFFFFF
+    tertiaryContainer  = BackgroundNeutral,        // #E5F5EA
+    onTertiaryContainer = ContentPrimary,          // #122300
+
+    // Surfaces
+    background         = BackgroundScreen,         // #FFFFFF
+    onBackground       = ContentPrimary,           // #122300
+
+    surface            = BackgroundScreen,         // #FFFFFF
+    onSurface          = ContentPrimary,           // #122300
+    surfaceVariant     = BackgroundNeutral,        // #E5F5EA
+    onSurfaceVariant   = ContentSecondary,         // #454745
+
+    // Overlays / outlines
+    outline            = BorderNeutral,            // #0E0F0C @ 12%
+    outlineVariant     = BorderOverlay,
+
+    // Errors (sentiment negative)
+    error              = SentimentNegativeVibrant, // #A8200D
+    onError            = BaseContrast,             // #FFFFFF
+    errorContainer     = Color(0xFFFFF0EE),        // light tint of error
+    onErrorContainer   = SentimentNegativeVibrant,
+
+    // Inverse / scrim
+    inverseSurface     = BaseDark,                 // #121511
+    inverseOnSurface   = BaseContrast,             // #FFFFFF
+    inversePrimary     = InteractiveAccent,        // #7BF179
+    scrim              = BaseDark,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+// ── Dark colour scheme ────────────────────────────────────────────────────────
+private val DarkColorScheme = darkColorScheme(
+    primary            = InteractiveAccent,        // #7BF179  bright on dark
+    onPrimary          = BaseDark,                 // #121511
+    primaryContainer   = InteractivePrimary,       // #163300
+    onPrimaryContainer = InteractiveAccent,        // #7BF179
 
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    secondary          = InteractiveContrast,      // #7BF179
+    onSecondary        = BaseDark,
+    secondaryContainer = InteractivePrimary,
+    onSecondaryContainer = InteractiveAccent,
+
+    tertiary           = ContentTertiary,          // #6A6C6A
+    onTertiary         = BaseContrast,
+    tertiaryContainer  = ContentSecondary,         // #454745
+    onTertiaryContainer = BaseContrast,
+
+    background         = BaseDark,                 // #121511
+    onBackground       = BaseContrast,             // #FFFFFF
+
+    surface            = BaseDark,                 // #121511
+    onSurface          = BaseContrast,
+    surfaceVariant     = ContentPrimary,           // #122300  very dark green
+    onSurfaceVariant   = ContentTertiary,          // #6A6C6A
+
+    outline            = ContentSecondary,         // #454745
+    outlineVariant     = ContentTertiary,
+
+    error              = SentimentNegativeVibrant, // #A8200D
+    onError            = BaseContrast,
+    errorContainer     = Color(0xFF690005),
+    onErrorContainer   = Color(0xFFFFDAD6),
+
+    inverseSurface     = BaseContrast,
+    inverseOnSurface   = BaseDark,
+    inversePrimary     = InteractivePrimary,
+    scrim              = BaseDark,
 )
 
 @Composable
-fun TP3ParcialTheme(
+fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+        typography  = AppTypography,
+        content     = content,
     )
 }
