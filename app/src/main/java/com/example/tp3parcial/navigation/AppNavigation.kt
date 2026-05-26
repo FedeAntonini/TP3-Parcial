@@ -5,7 +5,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tp3parcial.auth.LoginScreen
-import com.example.tp3parcial.home.HomeScreen
 
 @Composable
 fun AppNavigation() {
@@ -15,11 +14,11 @@ fun AppNavigation() {
         navController    = navController,
         startDestination = Routes.HOME,
     ) {
-        composable(Routes.HOME) {
-            HomeScreen(navController = navController)
-        }
         composable(Routes.LOGIN) {
             LoginScreen(navController = navController)
+        }
+        composable(Routes.HOME) {
+            MainScreen(navController = navController)
         }
     }
 }
