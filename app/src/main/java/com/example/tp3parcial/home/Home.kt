@@ -39,5 +39,19 @@ fun HomeScreen(navController: NavController) {
         ) {
             Text("Go to Login")
         }
+
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_VERIFY) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Verify Screen")
+        }
+
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_SMS) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Sms Verification")
+        }
     }
 }

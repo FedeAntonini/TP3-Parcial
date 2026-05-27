@@ -10,6 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.tp3parcial.auth.components.LoginView
 import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
 
