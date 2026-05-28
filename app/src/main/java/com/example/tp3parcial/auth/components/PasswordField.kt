@@ -1,18 +1,18 @@
-package com.example.tp3parcial.auth
+package com.example.tp3parcial.auth.components
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.example.tp3parcial.R
 import com.example.tp3parcial.common.BaseTextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 @Composable
 fun PasswordField(
@@ -30,7 +30,7 @@ fun PasswordField(
         modifier = modifier,
         visualTransformation =
             if (passwordVisible)
-                VisualTransformation.None
+                VisualTransformation.Companion.None
             else
                 PasswordVisualTransformation(),
         trailingIcon = {

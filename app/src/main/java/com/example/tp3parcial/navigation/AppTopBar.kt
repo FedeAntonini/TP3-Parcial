@@ -1,6 +1,5 @@
 package com.example.tp3parcial.navigation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -27,17 +27,20 @@ import com.example.tp3parcial.common.RoundedMoreHoriButton
 
 @Composable
 fun AppTopBar(
+    modifier: Modifier = Modifier,
     leftComponent: @Composable (() -> Unit)? = null,
     centerComponent: @Composable (() -> Unit)? = null,
     rightComponent: @Composable (() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .defaultMinSize(minHeight = 64.dp)
-            .background(MaterialTheme.colorScheme.background)
-            .windowInsetsPadding(WindowInsets.statusBars),
-        verticalAlignment = Alignment.CenterVertically
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .padding(horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+
     ) {
         Box(modifier = Modifier.sizeIn(minWidth = 48.dp)) {
             leftComponent?.invoke()

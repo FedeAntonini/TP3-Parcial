@@ -53,5 +53,47 @@ fun HomeScreen(navController: NavController) {
         ) {
             Text("Go to Sms Verification")
         }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_FACE) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Face Verification")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_ID) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Id Verification")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_VERIFIED) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Login Verified")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_PROFILE) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Login Profile")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_SIGNATURE) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Signature")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_PASSWORD) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to CreatePassword")
+        }
+        Button(
+            onClick  = { navController.navigate(Routes.LOGIN_DONE) },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Go to Login Done")
+        }
     }
 }

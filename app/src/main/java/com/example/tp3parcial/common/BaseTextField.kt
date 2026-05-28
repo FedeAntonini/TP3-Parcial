@@ -28,7 +28,7 @@ fun BaseTextField(
             Text(placeholder)
         },
         singleLine = true,
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(8.dp),
         visualTransformation = visualTransformation,
         trailingIcon = trailingIcon,
         colors = OutlinedTextFieldDefaults.colors(

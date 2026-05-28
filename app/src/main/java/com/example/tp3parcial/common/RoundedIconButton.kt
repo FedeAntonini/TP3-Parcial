@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,7 +24,8 @@ fun RoundedIconButton(
     onClick: () -> Unit,
     painter: Painter,
     contentDescription: String,
-    background: Color = MaterialTheme.colorScheme.surfaceVariant
+    background: Color = MaterialTheme.colorScheme.surfaceVariant,
+    tint: Color = LocalContentColor.current
 ) {
     Box(
         modifier = Modifier
@@ -35,6 +37,7 @@ fun RoundedIconButton(
     ) {
         Icon(
             painter = painter,
+            tint = tint,
             contentDescription = contentDescription
         )
     }
@@ -65,6 +68,17 @@ fun RoundedCloseButton(onClick: () -> Unit) {
         onClick = onClick,
         painter = painterResource(R.drawable.close),
         contentDescription = "Close"
+    )
+}
+
+@Composable
+fun RoundedCloseButtonVariant(onClick: () -> Unit) {
+    RoundedIconButton(
+        onClick = onClick,
+        background = Color(0xFF0B390F),
+        painter = painterResource(R.drawable.close),
+        contentDescription = "Close",
+        tint = Color(0xFF7BF179)
     )
 }
 
