@@ -14,6 +14,13 @@ import com.example.tp3parcial.auth.SignaturePageScreen
 import com.example.tp3parcial.auth.SmsVerificationScreen
 import com.example.tp3parcial.auth.VerifiedScreen
 import com.example.tp3parcial.auth.VerifyPhoneScreen
+import com.example.tp3parcial.home.CashInAmountScreen
+import com.example.tp3parcial.home.CashInOptionsScreen
+import com.example.tp3parcial.home.CashInSuccessScreen
+import com.example.tp3parcial.home.NotificationsScreen
+import com.example.tp3parcial.home.OTCPartnersScreen
+import com.example.tp3parcial.home.OnlineCashInScreen
+import com.example.tp3parcial.home.DueDatesScreen
 
 @Composable
 fun AppNavigation() {
@@ -55,6 +62,28 @@ fun AppNavigation() {
         }
         composable(Routes.HOME) {
             MainScreen(navController = navController)
+        }
+        // Home flow
+        composable(Routes.CASH_IN) {
+            CashInOptionsScreen(navController = navController)
+        }
+        composable(Routes.CASH_IN_ONLINE) {
+            OnlineCashInScreen(navController = navController)
+        }
+        composable(Routes.CASH_IN_OTC) {
+            OTCPartnersScreen(navController = navController)
+        }
+        composable(Routes.CASH_IN_AMOUNT) {
+            CashInAmountScreen(navController = navController)
+        }
+        composable(Routes.CASH_IN_SUCCESS) {
+            CashInSuccessScreen(navController = navController)
+        }
+        composable(Routes.NOTIFICATIONS) {
+            NotificationsScreen(navController = navController)
+        }
+        composable(Routes.DUE_DATES) {
+            DueDatesScreen(navController = navController)
         }
     }
 }
