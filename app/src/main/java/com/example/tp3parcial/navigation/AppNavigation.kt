@@ -25,6 +25,9 @@ import com.example.tp3parcial.manage.ManageAllDoneScreen
 import com.example.tp3parcial.manage.ManageCreditScoreScreen
 import com.example.tp3parcial.manage.ManageProfileDetailScreen
 import com.example.tp3parcial.manage.ManageProfileScreen
+import com.example.tp3parcial.loans.LoansApplyScreen
+import com.example.tp3parcial.loans.LoansSuccessScreen
+import com.example.tp3parcial.loans.LoansActiveScreen
 
 @Composable
 fun AppNavigation() {
@@ -100,6 +103,15 @@ fun AppNavigation() {
         }
         composable(Routes.DUE_DATES) {
             DueDatesScreen(navController = navController)
+        }
+        composable(Routes.LOANS_APPLY) {
+            LoansApplyScreen(navController = navController)
+        }
+        composable(Routes.LOANS_SUCCESS) {
+            LoansSuccessScreen(navController = navController)
+        }
+        composable(Routes.LOANS_ACTIVE) {
+            LoansActiveScreen(navController = navController)
         }
     }
 }

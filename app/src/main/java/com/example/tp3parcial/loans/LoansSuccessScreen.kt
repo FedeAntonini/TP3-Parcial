@@ -1,4 +1,4 @@
-package com.example.tp3parcial.home
+package com.example.tp3parcial.loans
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
@@ -24,7 +24,7 @@ import com.example.tp3parcial.ui.theme.InteractivePrimary
 import com.example.tp3parcial.common.TransactionDetailRow
 
 @Composable
-fun CashInSuccessScreen(navController: NavController) {
+fun LoansSuccessScreen(navController: NavController) {
     Scaffold(
         topBar = {
             Row(
@@ -44,7 +44,7 @@ fun CashInSuccessScreen(navController: NavController) {
                 }
                 Row {
                     IconButton(onClick = {}) {
-                        Icon(Icons.Outlined.Add, contentDescription = "Info")
+                        Icon(Icons.Outlined.Info, contentDescription = "Info")
                     }
                 }
             }
@@ -96,24 +96,23 @@ fun CashInSuccessScreen(navController: NavController) {
             )
 
             Text(
-                text = "2,500.00 PHP",
+                text = "2,000.00 PHP",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = "From GCash",
+                text = "From Apple Inc.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
-            // Chip Cash-In
             Surface(
                 shape = RoundedCornerShape(50),
                 color = MaterialTheme.colorScheme.surfaceVariant
             ) {
                 Text(
-                    text = "Cash-In",
+                    text = "Loan Amount",
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                     style = MaterialTheme.typography.labelMedium
                 )
@@ -123,7 +122,6 @@ fun CashInSuccessScreen(navController: NavController) {
             HorizontalDivider()
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Transaction Details
             Text(
                 text = "Transaction Details",
                 style = MaterialTheme.typography.titleMedium,
@@ -131,7 +129,9 @@ fun CashInSuccessScreen(navController: NavController) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            TransactionDetailRow("Transfer Fee", "-₱15.00")
+            TransactionDetailRow("Monthly Fee", "₱982.12")
+            TransactionDetailRow("Interest", "2.99%")
+            TransactionDetailRow("Installment plan", "6 Months")
             TransactionDetailRow("Date & Time", "Jul 15, 2024 9:12 AM")
             TransactionDetailRow("Transaction Number", "#200412312551")
 
@@ -148,11 +148,10 @@ fun CashInSuccessScreen(navController: NavController) {
                 Text(
                     text = "Go to Help Center",
                     color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
     }
 }
-
 

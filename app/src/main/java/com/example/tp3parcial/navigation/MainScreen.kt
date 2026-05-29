@@ -63,7 +63,7 @@ fun MainScreen(navController: NavController) {
             modifier         = Modifier.padding(innerPadding)
         ) {
             composable(Routes.HOME)    { HomeScreen(navController) }
-            composable(Routes.LOANS)   { LoansScreen(innerNavController) }
+            composable(Routes.LOANS)   { LoansScreen(navController) }
             composable(Routes.SHOP)    { ShopScreen(innerNavController) }
             composable(Routes.HISTORY) { HistoryScreen(innerNavController) }
             composable(Routes.MANAGE)  { ManageProfileScreen(innerNavController) }
