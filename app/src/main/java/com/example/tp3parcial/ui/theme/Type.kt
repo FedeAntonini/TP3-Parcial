@@ -18,21 +18,21 @@ val montserratFamily = FontFamily(
 val AppTypography = Typography(
     // ── Display ──────────────────────────────────────────────────────────────
     displayLarge = TextStyle(
-        fontFamily = FontFamily.Default, // Roboto
+        fontFamily = montserratFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 57.sp,
         lineHeight = 64.sp,
         letterSpacing = (-0.25).sp,
     ),
     displayMedium = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = montserratFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 45.sp,
         lineHeight = 52.sp,
         letterSpacing = 0.sp,
     ),
     displaySmall = TextStyle(
-        fontFamily = FontFamily.Default,
+        fontFamily = montserratFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 36.sp,
         lineHeight = 44.sp,

@@ -37,7 +37,7 @@ fun AppTopBar(
             .fillMaxWidth()
             .defaultMinSize(minHeight = 64.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = 8.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
 

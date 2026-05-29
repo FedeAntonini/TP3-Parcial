@@ -1,7 +1,11 @@
 package com.example.tp3parcial.navigation
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -15,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tp3parcial.history.HistoryScreen
 import com.example.tp3parcial.home.HomeScreen
 import com.example.tp3parcial.loans.LoansScreen
-import com.example.tp3parcial.manage.ManageScreen
+import com.example.tp3parcial.manage.ManageProfileScreen
 import com.example.tp3parcial.shop.ShopScreen
 
 @Composable
@@ -62,7 +66,7 @@ fun MainScreen(navController: NavController) {
             composable(Routes.LOANS)   { LoansScreen(innerNavController) }
             composable(Routes.SHOP)    { ShopScreen(innerNavController) }
             composable(Routes.HISTORY) { HistoryScreen(innerNavController) }
-            composable(Routes.MANAGE)  { ManageScreen(innerNavController) }
+            composable(Routes.MANAGE)  { ManageProfileScreen(innerNavController) }
         }
     }
 }

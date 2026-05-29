@@ -21,19 +21,23 @@ import com.example.tp3parcial.home.NotificationsScreen
 import com.example.tp3parcial.home.OTCPartnersScreen
 import com.example.tp3parcial.home.OnlineCashInScreen
 import com.example.tp3parcial.home.DueDatesScreen
+import com.example.tp3parcial.manage.ManageAllDoneScreen
+import com.example.tp3parcial.manage.ManageCreditScoreScreen
+import com.example.tp3parcial.manage.ManageProfileDetailScreen
+import com.example.tp3parcial.manage.ManageProfileScreen
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
 
     NavHost(
-        navController    = navController,
+        navController = navController,
         startDestination = Routes.HOME,
     ) {
         composable(Routes.LOGIN) {
             LoginScreen(navController = navController)
         }
-        composable(Routes.LOGIN_VERIFY){
+        composable(Routes.LOGIN_VERIFY) {
             VerifyPhoneScreen(navController = navController)
         }
         composable(Routes.LOGIN_SMS) {
@@ -59,6 +63,18 @@ fun AppNavigation() {
         }
         composable(Routes.LOGIN_DONE) {
             DonePageScreen(navController = navController)
+        }
+        composable(Routes.MANAGE_PAGE) {
+            ManageProfileScreen(navController = navController)
+        }
+        composable(Routes.MANAGE_PROFILE) {
+            ManageProfileDetailScreen(navController = navController)
+        }
+        composable(Routes.MANAGE_DONE) {
+            ManageAllDoneScreen(navController = navController)
+        }
+        composable(Routes.MANAGE_CREDIT) {
+            ManageCreditScoreScreen(navController = navController)
         }
         composable(Routes.HOME) {
             MainScreen(navController = navController)
