@@ -31,6 +31,7 @@ import com.example.tp3parcial.manage.ManageAllDoneScreen
 import com.example.tp3parcial.manage.ManageCreditScoreScreen
 import com.example.tp3parcial.manage.ManageProfileDetailScreen
 import com.example.tp3parcial.manage.ManageProfileScreen
+import com.example.tp3parcial.onboarding.OnboardingScreen
 
 @Composable
 fun AppNavigation() {
@@ -120,6 +121,9 @@ fun AppNavigation() {
         }
         composable(Routes.HISTORY_TRANSACTION) {
             TransactionDetailsScreen(navController = navController)
+        }
+        composable(Routes.ONBOARDING) {
+            OnboardingScreen(navController = navController)
         }
         composable(Routes.DEBUG) {
             DebugScreen(navController = navController)

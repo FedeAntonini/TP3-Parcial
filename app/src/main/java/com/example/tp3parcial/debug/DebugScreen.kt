@@ -22,6 +22,9 @@ fun DebugScreen(navController: NavController) {
             Button(onClick = { navController.navigate(Routes.HISTORY_TRANSACTION) }) {
                 Text(text = "To History Transaction")
             }
+            Button(onClick = { navController.navigate(Routes.ONBOARDING) }) {
+                Text(text = "To Onboarding")
+            }
         }
     }
 }

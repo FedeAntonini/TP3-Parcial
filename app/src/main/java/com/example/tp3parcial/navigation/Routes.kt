@@ -22,7 +22,8 @@ object Routes {
     const val MANAGE_PROFILE = "manage_profile"
     const val MANAGE_DONE = "manage_done"
     const val MANAGE_CREDIT = "manage_credit"
-    const val SPLASH = "splash"
+    const val ONBOARDING = "onboarding"
+
     const val HOME  = "home"
     const val LOANS = "loans"
     const val SHOP = "shop"
