@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.tp3parcial.common.AppLogo
 import com.example.tp3parcial.navigation.AppTopBar
+import com.example.tp3parcial.navigation.Routes
 import com.example.tp3parcial.onboarding.components.OnboardingView
 import com.example.tp3parcial.onboarding.data.onboardingPages
 
@@ -28,9 +29,8 @@ fun OnboardingScreen(
     ) { padding ->
         OnboardingView(
             pages = onboardingPages,
-            onGetStarted = { /* advance pager or no-op */ },
-            onLogin = {},
-            onSignUp = { },
+            onLogin = { navController.navigate(Routes.LOGIN)},
+            onSignUp = { navController.navigate(Routes.LOGIN_VERIFY)},
             modifier = Modifier
                 .background(Color(0xFF002203))
                 .padding(padding)

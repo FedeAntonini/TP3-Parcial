@@ -66,4 +66,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.material.icons.extended)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.converter.gson)
+    implementation(libs.androidx.datastore.preferences)
 }

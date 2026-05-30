@@ -29,7 +29,7 @@ import com.example.tp3parcial.manage.interfaces.ProfileMenuItem
 import com.example.tp3parcial.ui.theme.AppTheme
 
 @Composable
-fun ManageProfileView(modifier: Modifier = Modifier) {
+fun ManageProfileView(modifier: Modifier = Modifier, onLogout: () -> Unit) {
     val scrollState = rememberScrollState()
     Column(
         modifier = modifier
@@ -54,7 +54,7 @@ fun ManageProfileView(modifier: Modifier = Modifier) {
             ProfileMenuItems()
             HorizontalDivider(color = Color(0xFFE5E2E1))
             ProfileMenuItemRow(
-                item = ProfileMenuItem(R.drawable.log_out, "Log Out") { }
+                item = ProfileMenuItem(R.drawable.log_out, "Log Out", onClick = onLogout)
             )
         }
 
@@ -146,6 +146,6 @@ fun ProfileMenuItems() {
 @Composable
 fun ManageProfileViewPreview() {
     AppTheme {
-        ManageProfileView()
+        ManageProfileView(onLogout = {})
     }
 }

@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,17 +37,18 @@ import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.onboarding.data.onboardingPages
 import com.example.tp3parcial.onboarding.interfaces.OnboardingPage
 import com.example.tp3parcial.ui.theme.AppTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun OnboardingView(
     pages: List<OnboardingPage>,
-    onGetStarted: () -> Unit,
     onLogin: () -> Unit,
     onSignUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val currentPage = pages[pagerState.currentPage]
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = modifier.fillMaxSize(),
@@ -133,7 +135,11 @@ fun OnboardingView(
                 PillButton(text = "Sign up for free", onClick = onSignUp)
             }
         } else {
-            PillButton(text = "Get Started", onClick = onGetStarted)
+            PillButton(text = "Get Started", onClick = {
+                scope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                }
+            })
         }
     }
 }
@@ -164,6 +170,6 @@ fun DotsIndicator(
 @Composable
 fun OnboardingViewPreview() {
     AppTheme {
-        OnboardingView(pages = onboardingPages, onLogin = {}, onSignUp = {}, onGetStarted = {})
+        OnboardingView(pages = onboardingPages, onLogin = {}, onSignUp = {})
     }
 }
