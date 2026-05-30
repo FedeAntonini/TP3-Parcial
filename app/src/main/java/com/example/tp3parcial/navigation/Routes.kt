@@ -27,6 +27,8 @@ object Routes {
     const val LOANS = "loans"
     const val SHOP = "shop"
     const val HISTORY = "history"
+    const val HISTORY_TRANSACTION = "history_transaction"
+    const val DEBUG  = "debug"
     const val MANAGE = "manage"
     const val LOANS_APPLY   = "loans_apply"
     const val LOANS_SUCCESS = "loans_success"

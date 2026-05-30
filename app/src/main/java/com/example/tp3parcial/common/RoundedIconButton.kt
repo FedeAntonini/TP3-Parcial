@@ -72,7 +72,8 @@ fun RoundedBackButton(onClick: () -> Unit) {
     RoundedIconButton(
         onClick = onClick,
         painter = painterResource(R.drawable.arrow_back),
-        contentDescription = "Back"
+        contentDescription = "Back",
+        background = Color(0xFFE5E2E1)
     )
 }
 

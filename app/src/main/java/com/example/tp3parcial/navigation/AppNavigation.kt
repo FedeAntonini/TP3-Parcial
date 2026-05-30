@@ -14,20 +14,23 @@ import com.example.tp3parcial.auth.SignaturePageScreen
 import com.example.tp3parcial.auth.SmsVerificationScreen
 import com.example.tp3parcial.auth.VerifiedScreen
 import com.example.tp3parcial.auth.VerifyPhoneScreen
+import com.example.tp3parcial.debug.DebugScreen
+import com.example.tp3parcial.history.HistoryScreen
+import com.example.tp3parcial.history.TransactionDetailsScreen
 import com.example.tp3parcial.home.CashInAmountScreen
 import com.example.tp3parcial.home.CashInOptionsScreen
 import com.example.tp3parcial.home.CashInSuccessScreen
+import com.example.tp3parcial.home.DueDatesScreen
 import com.example.tp3parcial.home.NotificationsScreen
 import com.example.tp3parcial.home.OTCPartnersScreen
 import com.example.tp3parcial.home.OnlineCashInScreen
-import com.example.tp3parcial.home.DueDatesScreen
+import com.example.tp3parcial.loans.LoansActiveScreen
+import com.example.tp3parcial.loans.LoansApplyScreen
+import com.example.tp3parcial.loans.LoansSuccessScreen
 import com.example.tp3parcial.manage.ManageAllDoneScreen
 import com.example.tp3parcial.manage.ManageCreditScoreScreen
 import com.example.tp3parcial.manage.ManageProfileDetailScreen
 import com.example.tp3parcial.manage.ManageProfileScreen
-import com.example.tp3parcial.loans.LoansApplyScreen
-import com.example.tp3parcial.loans.LoansSuccessScreen
-import com.example.tp3parcial.loans.LoansActiveScreen
 
 @Composable
 fun AppNavigation() {
@@ -82,7 +85,6 @@ fun AppNavigation() {
         composable(Routes.HOME) {
             MainScreen(navController = navController)
         }
-        // Home flow
         composable(Routes.CASH_IN) {
             CashInOptionsScreen(navController = navController)
         }
@@ -112,6 +114,15 @@ fun AppNavigation() {
         }
         composable(Routes.LOANS_ACTIVE) {
             LoansActiveScreen(navController = navController)
+        }
+        composable(Routes.HISTORY) {
+            HistoryScreen(navController = navController)
+        }
+        composable(Routes.HISTORY_TRANSACTION) {
+            TransactionDetailsScreen(navController = navController)
+        }
+        composable(Routes.DEBUG) {
+            DebugScreen(navController = navController)
         }
     }
 }
