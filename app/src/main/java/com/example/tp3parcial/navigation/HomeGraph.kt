@@ -21,6 +21,9 @@ import com.example.tp3parcial.manage.ManageAllDoneScreen
 import com.example.tp3parcial.manage.ManageCreditScoreScreen
 import com.example.tp3parcial.manage.ManageProfileScreen
 import com.example.tp3parcial.manage.ManageScreen
+import com.example.tp3parcial.shop.ShopFilterScreen
+import com.example.tp3parcial.shop.ShopProductDetailScreen
+import com.example.tp3parcial.shop.ShopSearchScreen
 
 fun NavGraphBuilder.homeGraph(navController: NavController, authViewModel: AuthViewModel) {
     navigation(startDestination = Routes.HOME, route = Graph.HOME) {
@@ -74,6 +77,15 @@ fun NavGraphBuilder.homeGraph(navController: NavController, authViewModel: AuthV
         }
         composable(Routes.HISTORY_TRANSACTION) {
             TransactionDetailsScreen(navController = navController)
+        }
+        composable(Routes.SHOP_PRODUCT) {
+            ShopProductDetailScreen(navController = navController)
+        }
+        composable(Routes.SHOP_SEARCH) {
+            ShopSearchScreen(navController = navController)
+        }
+        composable(Routes.SHOP_FILTER) {
+            ShopFilterScreen(navController = navController)
         }
     }
 }

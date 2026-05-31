@@ -32,4 +32,8 @@ object Routes {
     const val LOANS_APPLY   = "loans_apply"
     const val LOANS_SUCCESS = "loans_success"
     const val LOANS_ACTIVE  = "loans_active"
+
+    const val SHOP_PRODUCT = "shop_product"
+    const val SHOP_SEARCH = "shop_search"
+    const val SHOP_FILTER = "shop_filter"
 }
