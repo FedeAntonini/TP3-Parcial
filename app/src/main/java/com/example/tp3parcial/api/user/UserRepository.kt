@@ -5,9 +5,9 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(
-    private val api: UserApi  // Hilt injects this automatically
+    private val api: UserApi
 ) {
-    suspend fun getUsers(): Result<List<User>> = runCatching {
-        api.getUsers().map { it.toDomain() }
+    suspend fun getUser(id: Int): Result<User> = runCatching {
+        api.getUser(id).user.toDomain()
     }
 }

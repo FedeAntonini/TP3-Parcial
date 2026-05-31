@@ -17,6 +17,7 @@ import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.common.RoundedInfoButton
 import com.example.tp3parcial.navigation.AppTopBar
+import com.example.tp3parcial.navigation.Routes
 
 
 @Composable
@@ -25,7 +26,7 @@ fun SmsVerificationScreen(navController: NavController, phoneNumber: String = "1
     Scaffold(
         topBar = {
             AppTopBar(
-                leftComponent = { BackButton { } },
+                leftComponent = { BackButton({ navController.popBackStack() }) },
                 rightComponent = { RoundedInfoButton {} }
             )
         },
@@ -33,7 +34,7 @@ fun SmsVerificationScreen(navController: NavController, phoneNumber: String = "1
             BottomActionBar {
                 PillButton(
                     text = "Next",
-                    onClick = { /* TODO login */ },
+                    onClick = { navController.navigate(Routes.LOGIN_FACE)},
                     modifier = Modifier.fillMaxWidth()
                 )
             }

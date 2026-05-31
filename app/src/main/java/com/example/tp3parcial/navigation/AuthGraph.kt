@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.example.tp3parcial.api.auth.models.AuthViewModel
 import com.example.tp3parcial.auth.CreatePasswordPageScreen
 import com.example.tp3parcial.auth.DonePageScreen
 import com.example.tp3parcial.auth.FaceRecognitionScreen
@@ -14,7 +15,6 @@ import com.example.tp3parcial.auth.SignaturePageScreen
 import com.example.tp3parcial.auth.SmsVerificationScreen
 import com.example.tp3parcial.auth.VerifiedScreen
 import com.example.tp3parcial.auth.VerifyPhoneScreen
-import com.example.tp3parcial.auth.models.authentication.AuthViewModel
 import com.example.tp3parcial.debug.DebugScreen
 import com.example.tp3parcial.onboarding.OnboardingScreen
 

@@ -29,7 +29,12 @@ import com.example.tp3parcial.manage.interfaces.ProfileMenuItem
 import com.example.tp3parcial.ui.theme.AppTheme
 
 @Composable
-fun ManageProfileView(modifier: Modifier = Modifier, onLogout: () -> Unit) {
+fun ManageView(
+    modifier: Modifier = Modifier,
+    onAccountDetails: () -> Unit,
+    onCreditScore: () -> Unit,
+    onLogout: () -> Unit
+) {
     val scrollState = rememberScrollState()
     Column(
         modifier = modifier
@@ -43,7 +48,7 @@ fun ManageProfileView(modifier: Modifier = Modifier, onLogout: () -> Unit) {
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
-        AccountDetails()
+        AccountDetails(onEdit = onAccountDetails)
         Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(
                 text = "General",
@@ -51,7 +56,10 @@ fun ManageProfileView(modifier: Modifier = Modifier, onLogout: () -> Unit) {
                 color = MaterialTheme.colorScheme.tertiary
             )
             HorizontalDivider(color = Color(0xFFE5E2E1))
-            ProfileMenuItems()
+            ProfileMenuItems(
+                onAccountDetails,
+                onCreditScore,
+            )
             HorizontalDivider(color = Color(0xFFE5E2E1))
             ProfileMenuItemRow(
                 item = ProfileMenuItem(R.drawable.log_out, "Log Out", onClick = onLogout)
@@ -63,7 +71,9 @@ fun ManageProfileView(modifier: Modifier = Modifier, onLogout: () -> Unit) {
 }
 
 @Composable
-fun AccountDetails() {
+fun AccountDetails(
+    onEdit: () -> Unit,
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -79,7 +89,7 @@ fun AccountDetails() {
                 .padding(horizontal = 8.dp)
                 .height(56.dp)
         ) {
-            EditButton(onClick = {}, modifier = Modifier.align(Alignment.TopEnd))
+            EditButton(onClick = onEdit, modifier = Modifier.align(Alignment.TopEnd))
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 RoundedAvatarPlaceholderButton(
                     onClick = { },
@@ -125,12 +135,15 @@ fun EditButton(
 }
 
 @Composable
-fun ProfileMenuItems() {
+fun ProfileMenuItems(
+    onAccountDetails: () -> Unit,
+    onCreditScore: () -> Unit,
+) {
     val profileMenuItems = listOf(
-        ProfileMenuItem(R.drawable.account_details, "Account details") { },
+        ProfileMenuItem(R.drawable.account_details, "Account details", onClick = onAccountDetails),
         ProfileMenuItem(R.drawable.unread_mailbox, "Receiving by email or phone") { },
         ProfileMenuItem(R.drawable.scheduled_pay, "Scheduled pay") { },
-        ProfileMenuItem(R.drawable.credit_score, "Credit score") { },
+        ProfileMenuItem(R.drawable.credit_score, "Credit score", onClick = onCreditScore),
         ProfileMenuItem(R.drawable.settings, "Settings") { },
         ProfileMenuItem(R.drawable.terms_and_conditions, "Terms and Conditions") { },
         ProfileMenuItem(R.drawable.help, "Help") { },
@@ -146,6 +159,9 @@ fun ProfileMenuItems() {
 @Composable
 fun ManageProfileViewPreview() {
     AppTheme {
-        ManageProfileView(onLogout = {})
+        ManageView(
+            onLogout = {},
+            onCreditScore = {},
+            onAccountDetails = {})
     }
 }

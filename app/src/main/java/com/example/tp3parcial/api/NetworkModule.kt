@@ -1,6 +1,7 @@
 package com.example.tp3parcial.api
 
 import com.example.tp3parcial.api.auth.AuthApi
+import com.example.tp3parcial.api.transaction.TransactionApi
 import com.example.tp3parcial.api.user.UserApi
 import dagger.Module
 import dagger.Provides
@@ -29,4 +30,9 @@ object NetworkModule {
     @Singleton
     fun provideAuthApi(retrofit: Retrofit): AuthApi =
         retrofit.create(AuthApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTransactionApi(retrofit: Retrofit): TransactionApi =
+        retrofit.create(TransactionApi::class.java)
 }

@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.tp3parcial.auth.models.authentication.AuthViewModel
+import com.example.tp3parcial.api.auth.models.AuthViewModel
 import com.example.tp3parcial.history.HistoryScreen
 import com.example.tp3parcial.history.TransactionDetailsScreen
 import com.example.tp3parcial.home.CashInAmountScreen
@@ -19,22 +19,22 @@ import com.example.tp3parcial.loans.LoansApplyScreen
 import com.example.tp3parcial.loans.LoansSuccessScreen
 import com.example.tp3parcial.manage.ManageAllDoneScreen
 import com.example.tp3parcial.manage.ManageCreditScoreScreen
-import com.example.tp3parcial.manage.ManageProfileDetailScreen
 import com.example.tp3parcial.manage.ManageProfileScreen
+import com.example.tp3parcial.manage.ManageScreen
 
 fun NavGraphBuilder.homeGraph(navController: NavController, authViewModel: AuthViewModel) {
     navigation(startDestination = Routes.HOME, route = Graph.HOME) {
-        composable(Routes.MANAGE_PAGE) {
-            ManageProfileScreen(navController = navController, authViewModel)
+        composable(Routes.MANAGE) {
+            ManageScreen(navController = navController, authViewModel)
         }
         composable(Routes.MANAGE_PROFILE) {
-            ManageProfileDetailScreen(navController = navController)
+            ManageProfileScreen(navController = navController)
         }
         composable(Routes.MANAGE_DONE) {
             ManageAllDoneScreen(navController = navController)
         }
         composable(Routes.MANAGE_CREDIT) {
-            ManageCreditScoreScreen(navController = navController)
+            ManageCreditScoreScreen(navController = navController, authViewModel)
         }
         composable(Routes.HOME) {
             MainScreen(navController = navController, authViewModel)

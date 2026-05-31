@@ -17,13 +17,14 @@ import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.common.RoundedCloseButtonVariant
 import com.example.tp3parcial.navigation.AppTopBar
+import com.example.tp3parcial.navigation.Routes
 
 @Composable
 fun DonePageScreen(navController: NavController) {
     Scaffold(
         topBar = {
             AppTopBar(
-                leftComponent = { RoundedCloseButtonVariant {} },
+                leftComponent = { RoundedCloseButtonVariant(onClick = { navController.popBackStack() }) },
                 centerComponent = { Box(modifier = Modifier.offset(y = 24.dp)) { AppLogo(width = 116.52.dp) } },
             )
         },
@@ -31,7 +32,7 @@ fun DonePageScreen(navController: NavController) {
             BottomActionBar {
                 PillButton(
                     text = "Done",
-                    onClick = { /* TODO login */ },
+                    onClick = { navController.navigate(Routes.LOGIN) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }

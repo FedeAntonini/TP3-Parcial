@@ -13,6 +13,7 @@ import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.common.RoundedInfoButton
 import com.example.tp3parcial.navigation.AppTopBar
+import com.example.tp3parcial.navigation.Routes
 
 
 @Composable
@@ -20,7 +21,7 @@ fun FaceRecognitionScreen(navController: NavController) {
     Scaffold(
         topBar = {
             AppTopBar(
-                leftComponent = { BackButton { } },
+                leftComponent = { BackButton({ navController.popBackStack() }) },
                 rightComponent = { RoundedInfoButton {} }
             )
         },
@@ -28,7 +29,7 @@ fun FaceRecognitionScreen(navController: NavController) {
             BottomActionBar {
                 PillButton(
                     text = "Next",
-                    onClick = { /* TODO login */ },
+                    onClick = { navController.navigate(Routes.LOGIN_ID) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }

@@ -19,6 +19,7 @@ import com.example.tp3parcial.common.LinkText
 fun LoginView(
     password: String,
     onPasswordChange: (String) -> Unit,
+    onChangeUser: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -39,7 +40,7 @@ fun LoginView(
                 AppLogo(175.dp)
             }
 
-            UserInfo()
+            UserInfo( onLinkClick = onChangeUser)
 
             FieldLabel("Password")
 
@@ -50,7 +51,7 @@ fun LoginView(
 
             LinkText(
                 text = "Forgot your password?",
-                onClick = {}
+                onClick = onChangeUser
             )
         }
     }

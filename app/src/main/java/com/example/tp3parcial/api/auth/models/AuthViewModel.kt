@@ -1,4 +1,4 @@
-package com.example.tp3parcial.auth.models.authentication
+package com.example.tp3parcial.api.auth.models
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +37,7 @@ class AuthViewModel @Inject constructor(
             authRepository.login(AuthRequestDto(username, password))
                 .onSuccess {
                     tokenDataStore.saveToken(it.token)
+                    tokenDataStore.saveUserId(it.user.id) // add this
                     isLoggedIn = true
                 }
                 .onFailure {
@@ -48,6 +49,7 @@ class AuthViewModel @Inject constructor(
     fun logout() {
         viewModelScope.launch {
             tokenDataStore.clearToken()
+            tokenDataStore.clearUserId() // add this
             isLoggedIn = false
         }
     }

@@ -4,6 +4,10 @@ import com.example.tp3parcial.api.notifications.Notifications
 import com.example.tp3parcial.api.notifications.NotificationsDto
 import java.time.LocalDate
 
+data class UserResponseDto(
+    val success: Boolean,
+    val user: UserDto
+)
 data class UserDto(
     val id: Int,
     val fullName: String,
@@ -41,3 +45,4 @@ fun UserDto.toDomain() = User(
         sms = notifications.sms
     )
 )
+

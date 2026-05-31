@@ -14,10 +14,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.tp3parcial.api.UiState
 import com.example.tp3parcial.auth.components.LoginView
-import com.example.tp3parcial.auth.models.authentication.AuthViewModel
+import com.example.tp3parcial.api.auth.models.AuthViewModel
 import com.example.tp3parcial.common.BottomActionBar
 import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.navigation.Graph
+import com.example.tp3parcial.navigation.Routes
 
 
 @Composable
@@ -50,6 +51,7 @@ fun LoginScreen(
         LoginView(
             password = password,
             onPasswordChange = { password = it },
+            onChangeUser = { navController.navigate(Routes.LOGIN_VERIFY) },
             modifier = Modifier.padding(padding)
         )
     }

@@ -16,11 +16,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.tp3parcial.auth.models.authentication.AuthViewModel
+import com.example.tp3parcial.api.auth.models.AuthViewModel
 import com.example.tp3parcial.history.HistoryScreen
 import com.example.tp3parcial.home.HomeScreen
 import com.example.tp3parcial.loans.LoansScreen
-import com.example.tp3parcial.manage.ManageProfileScreen
+import com.example.tp3parcial.manage.ManageScreen
 import com.example.tp3parcial.shop.ShopScreen
 
 @Composable
@@ -59,15 +59,15 @@ fun MainScreen(navController: NavController, authViewModel: AuthViewModel) {
         }
     ) { innerPadding ->
         NavHost(
-            navController    = innerNavController,
+            navController = innerNavController,
             startDestination = Routes.HOME,
-            modifier         = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Routes.HOME)    { HomeScreen(navController) }
-            composable(Routes.LOANS)   { LoansScreen(navController) }
-            composable(Routes.SHOP)    { ShopScreen(innerNavController) }
-            composable(Routes.HISTORY) { HistoryScreen(innerNavController) }
-            composable(Routes.MANAGE)  { ManageProfileScreen(innerNavController, authViewModel) }
+            composable(Routes.HOME) { HomeScreen(navController) }
+            composable(Routes.LOANS) { LoansScreen(navController) }
+            composable(Routes.SHOP) { ShopScreen(navController) }
+            composable(Routes.HISTORY) { HistoryScreen(navController) }
+            composable(Routes.MANAGE) { ManageScreen(navController, authViewModel) }
         }
     }
 }
