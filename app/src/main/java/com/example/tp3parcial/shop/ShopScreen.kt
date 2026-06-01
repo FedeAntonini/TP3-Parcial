@@ -20,42 +20,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import com.example.tp3parcial.api.UiState
+import com.example.tp3parcial.api.product.Brand
+import com.example.tp3parcial.api.product.Category
+import com.example.tp3parcial.api.product.Product
+import com.example.tp3parcial.api.product.ProductsData
+import com.example.tp3parcial.api.product.models.ProductViewModel
 import com.example.tp3parcial.common.AppLogo
 import com.example.tp3parcial.navigation.Routes
 import com.example.tp3parcial.ui.theme.InteractiveAccent
+import com.example.tp3parcial.ui.theme.InteractivePrimary
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-data class ShopProduct(
-    val id: Int,
-    val name: String,
-    val price: String,
-    val category: String
-)
-
-data class ShopCategory(val name: String, val icon: String)
-
-val sampleCategories = listOf(
-    ShopCategory("Phone", "📱"),
-    ShopCategory("Headphones", "🎧"),
-    ShopCategory("Apparel", "👕"),
-    ShopCategory("More", "➕"),
-)
-
-val sampleBrands = listOf("Apple", "Jordan", "Adidas")
-
-val sampleProducts = listOf(
-    ShopProduct(1, "iPhone 12 Pro", "₱1,200 × 24 mo", "Phone"),
-    ShopProduct(2, "iPhone 12 Pro", "₱1,200 × 24 mo", "Phone"),
-    ShopProduct(3, "iPhone 12 Pro", "₱1,200 × 24 mo", "Phone"),
-    ShopProduct(4, "Surface Laptop", "₱1,200 × 24 mo", "Laptop"),
-    ShopProduct(5, "iPhone 12 Pro", "₱1,200 × 24 mo", "Phone"),
-    ShopProduct(6, "PS4 Play Station", "₱1,200 × 24 mo", "Gaming"),
-)
-
-// ── Screen ────────────────────────────────────────────────────────────────────
 @Composable
-fun ShopScreen(navController: NavController) {
+fun ShopScreen(
+    navController: NavController,
+    viewModel: ProductViewModel = hiltViewModel()
+) {
+    val productsState by viewModel.products.collectAsStateWithLifecycle()
     var searchQuery by remember { mutableStateOf("") }
 
     LazyColumn(
@@ -65,28 +50,53 @@ fun ShopScreen(navController: NavController) {
         contentPadding = PaddingValues(bottom = 24.dp)
     ) {
         item { ShopTopBar(navController) }
-        item { ShopSearchBar(query = searchQuery, onQueryChange = { searchQuery = it }, navController) }
-        item { Spacer(modifier = Modifier.height(16.dp)) }
-        item { ShopBannerCard() }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
-        item { ShopCategoriesSection() }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
-        item { ShopBrandsSection() }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
         item {
-            ShopProductsSection(
-                title = "Recommended For You",
-                products = sampleProducts.take(3),
+            ShopSearchBar(
+                query = searchQuery,
+                onQueryChange = { searchQuery = it },
                 navController = navController
             )
         }
-        item { Spacer(modifier = Modifier.height(24.dp)) }
-        item {
-            ShopProductsSection(
-                title = "Best Sellers",
-                products = sampleProducts.drop(3),
-                navController = navController
-            )
+        item { Spacer(modifier = Modifier.height(16.dp)) }
+
+        when (productsState) {
+            is UiState.Loading -> item {
+                Box(
+                    modifier = Modifier.fillMaxWidth().height(200.dp),
+                    contentAlignment = Alignment.Center
+                ) { CircularProgressIndicator() }
+            }
+            is UiState.Error -> item {
+                Text(
+                    text = (productsState as UiState.Error).message,
+                    modifier = Modifier.padding(16.dp),
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+            is UiState.Success -> {
+                val data = (productsState as UiState.Success<ProductsData>).data
+                item { ShopBannerCard() }
+                item { Spacer(modifier = Modifier.height(24.dp)) }
+                item { ShopCategoriesSection(categories = data.categories) }
+                item { Spacer(modifier = Modifier.height(24.dp)) }
+                item { ShopBrandsSection(brands = data.brands) }
+                item { Spacer(modifier = Modifier.height(24.dp)) }
+                item {
+                    ShopProductsSection(
+                        title = "Recommended For You",
+                        products = data.featured,
+                        navController = navController
+                    )
+                }
+                item { Spacer(modifier = Modifier.height(24.dp)) }
+                item {
+                    ShopProductsSection(
+                        title = "Best Sellers",
+                        products = data.products,
+                        navController = navController
+                    )
+                }
+            }
         }
     }
 }
@@ -131,7 +141,6 @@ fun ShopSearchBar(query: String, onQueryChange: (String) -> Unit, navController:
                 singleLine = true,
                 enabled = false
             )
-            // Capa transparente encima que captura el toque
             Box(
                 modifier = Modifier
                     .matchParentSize()
@@ -182,7 +191,7 @@ fun ShopBannerCard() {
                     text = "Shop Now",
                     modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
                     style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = InteractivePrimary,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -192,12 +201,12 @@ fun ShopBannerCard() {
 
 // ── Categories ────────────────────────────────────────────────────────────────
 @Composable
-fun ShopCategoriesSection() {
+fun ShopCategoriesSection(categories: List<Category>) {
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         ShopSectionHeader(title = "Shop By Category")
         Spacer(modifier = Modifier.height(12.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-            items(sampleCategories) { category ->
+            items(categories) { category ->
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Box(
                         modifier = Modifier
@@ -221,12 +230,12 @@ fun ShopCategoriesSection() {
 
 // ── Brands ────────────────────────────────────────────────────────────────────
 @Composable
-fun ShopBrandsSection() {
+fun ShopBrandsSection(brands: List<Brand>) {
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
         ShopSectionHeader(title = "Popular Brands")
         Spacer(modifier = Modifier.height(12.dp))
         LazyRow(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            items(sampleBrands) { brand ->
+            items(brands) { brand ->
                 Box(
                     modifier = Modifier
                         .size(width = 80.dp, height = 56.dp)
@@ -234,10 +243,10 @@ fun ShopBrandsSection() {
                         .background(MaterialTheme.colorScheme.surfaceVariant),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = brand,
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold
+                    AsyncImage(
+                        model = brand.logo,
+                        contentDescription = brand.name,
+                        modifier = Modifier.size(40.dp)
                     )
                 }
             }
@@ -249,7 +258,7 @@ fun ShopBrandsSection() {
 @Composable
 fun ShopProductsSection(
     title: String,
-    products: List<ShopProduct>,
+    products: List<Product>,
     navController: NavController
 ) {
     Column(modifier = Modifier.padding(horizontal = 16.dp)) {
@@ -266,7 +275,7 @@ fun ShopProductsSection(
 }
 
 @Composable
-fun ShopProductCard(product: ShopProduct, onClick: () -> Unit) {
+fun ShopProductCard(product: Product, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .width(120.dp)
@@ -283,7 +292,11 @@ fun ShopProductCard(product: ShopProduct, onClick: () -> Unit) {
                 .background(MaterialTheme.colorScheme.surface),
             contentAlignment = Alignment.Center
         ) {
-            Text("📱", fontSize = 32.sp)
+            AsyncImage(
+                model = product.image,
+                contentDescription = product.name,
+                modifier = Modifier.fillMaxSize()
+            )
         }
         Spacer(modifier = Modifier.height(8.dp))
         Text(
@@ -293,14 +306,14 @@ fun ShopProductCard(product: ShopProduct, onClick: () -> Unit) {
             maxLines = 1
         )
         Text(
-            text = product.price,
+            text = "₱${product.monthlyInstallment} × ${product.installmentMonths} mo",
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
 
-// ── Sección Header ────────────────────────────────────────────────────────────
+// ── Section Header ────────────────────────────────────────────────────────────
 @Composable
 fun ShopSectionHeader(title: String) {
     Row(

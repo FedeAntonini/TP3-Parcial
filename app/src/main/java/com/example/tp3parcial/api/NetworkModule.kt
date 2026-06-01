@@ -1,6 +1,7 @@
 package com.example.tp3parcial.api
 
 import com.example.tp3parcial.api.auth.AuthApi
+import com.example.tp3parcial.api.product.ProductApi
 import com.example.tp3parcial.api.transaction.TransactionApi
 import com.example.tp3parcial.api.user.UserApi
 import dagger.Module
@@ -10,6 +11,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import com.example.tp3parcial.api.loan.LoanApi
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -35,4 +37,14 @@ object NetworkModule {
     @Singleton
     fun provideTransactionApi(retrofit: Retrofit): TransactionApi =
         retrofit.create(TransactionApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProductApi(retrofit: Retrofit): ProductApi =
+        retrofit.create(ProductApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideLoanApi(retrofit: Retrofit): LoanApi =
+        retrofit.create(LoanApi::class.java)
 }

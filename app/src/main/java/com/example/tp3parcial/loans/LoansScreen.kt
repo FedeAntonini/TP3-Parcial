@@ -9,21 +9,32 @@ import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.example.tp3parcial.api.UiState
+import com.example.tp3parcial.api.loan.Loan
+import com.example.tp3parcial.api.loan.LoansData
+import com.example.tp3parcial.api.loan.models.LoanViewModel
 import com.example.tp3parcial.common.AppLogo
 import com.example.tp3parcial.common.PillButton
 import com.example.tp3parcial.navigation.Routes
 import com.example.tp3parcial.ui.theme.InteractiveAccent
 
 @Composable
-fun LoansScreen(navController: NavController) {
+fun LoansScreen(
+    navController: NavController,
+    viewModel: LoanViewModel = hiltViewModel()
+) {
+    val loansState by viewModel.loans.collectAsStateWithLifecycle()
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -34,7 +45,32 @@ fun LoansScreen(navController: NavController) {
         item { Spacer(modifier = Modifier.height(8.dp)) }
         item { LoansBannerCard() }
         item { Spacer(modifier = Modifier.height(16.dp)) }
-        item { LoanDetailsCard() }
+
+        when (loansState) {
+            is UiState.Loading -> item {
+                Box(
+                    modifier = Modifier.fillMaxWidth().height(120.dp),
+                    contentAlignment = Alignment.Center
+                ) { CircularProgressIndicator() }
+            }
+            is UiState.Error -> item {
+                Text(
+                    text = (loansState as UiState.Error).message,
+                    modifier = Modifier.padding(16.dp),
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+            is UiState.Success -> {
+                val data = (loansState as UiState.Success<LoansData>).data
+                item {
+                    LoanDetailsCard(
+                        totalAmountDue = data.summary.totalAmountDue,
+                        totalActive = data.summary.totalActive
+                    )
+                }
+            }
+        }
+
         item { Spacer(modifier = Modifier.height(24.dp)) }
         item { HowItWorksSection() }
         item { Spacer(modifier = Modifier.height(24.dp)) }
@@ -126,7 +162,7 @@ fun LoansBannerCard() {
 
 // ── Loan Details Card ─────────────────────────────────────────────────────────
 @Composable
-fun LoanDetailsCard() {
+fun LoanDetailsCard(totalAmountDue: Double, totalActive: Int) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -176,9 +212,9 @@ fun LoanDetailsCard() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            LoanDetailItem(label = "Payable in", value = "6 - 12\nmonths")
+            LoanDetailItem(label = "Active Loans", value = "$totalActive")
+            LoanDetailItem(label = "Total Due", value = "₱${String.format("%,.2f", totalAmountDue)}")
             LoanDetailItem(label = "Interest Rate", value = "1.99%\nave per mo.")
-            LoanDetailItem(label = "Process Fee", value = "3%\nas low as")
         }
     }
 }
